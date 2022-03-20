@@ -17,10 +17,13 @@ namespace SchoolManager.Infrastructure.Data
         {
         }
 
+     
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<TeacherClass>()
                 .HasKey(e => new { e.ClassId, e.TeacherId });
+
+            base.OnModelCreating(builder);
         }
     }
 }

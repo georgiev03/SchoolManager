@@ -25,8 +25,6 @@ namespace SchoolManager.Infrastructure.Data
         [Required]
         public DateTime Birthdate { get; set; }
 
-        public Grade Grade { get; set; }
-
         public ICollection<Grade> Grades { get; set; } = new HashSet<Grade>();
 
         [ForeignKey(nameof(Class))]

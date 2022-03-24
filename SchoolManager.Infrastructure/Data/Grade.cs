@@ -9,6 +9,7 @@ namespace SchoolManager.Infrastructure.Data
         public int Id { get; set; }
 
         [Required]
+        [StringLength(30)]
         public string Subject { get; set; }
 
         [Required]

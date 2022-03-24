@@ -8,18 +8,22 @@ namespace SchoolManager.Infrastructure.Data
         public Guid StudentId { get; set; }
 
         [Required]
+        [StringLength(15)]
         public string FirstName { get; set; }
 
         [Required]
+        [StringLength(15)]
         public string LastName { get; set; }
 
         [Required]
+        [StringLength(50)]
         public string Address { get; set; }
 
         [Required]
         public string Email { get; set; }
 
         [Required]
+        [StringLength(15)]
         public string PhoneNumber { get; set; }
 
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new HashSet<TeacherClass>();

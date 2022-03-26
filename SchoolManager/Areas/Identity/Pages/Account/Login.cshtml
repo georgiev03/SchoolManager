@@ -28,23 +28,25 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="/" class="h1">School Manager</a>
+                <a href="/" class="h1"><b>School Manager</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in here</p>
+	            <h2><center>Sign in here</center></h2>
 
                 <form id="account" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	                <div class="form-floating">
+		                @*<label asp-for="Input.Email" class="form-label"></label>*@
+		                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="Email" aria-required="true" />
+		                <span asp-validation-for="Input.Email" class="text-danger"></span>
+	                </div>
+                    <br/>
                     <div class="form-floating">
-                        <label asp-for="Input.Email" class="form-label"></label>
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+	                    @*<label asp-for="Input.Password" class="form-label"></label>*@
+	                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" placeholder="Password" aria-required="true" />
+	                    <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div class="form-floating">
-                        <label asp-for="Input.Password" class="form-label"></label>
-                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
+                    <br/>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">

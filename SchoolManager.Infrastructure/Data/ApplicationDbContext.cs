@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Class> Classes { get; set; }
         public DbSet<Grade> Grades { get; set; }

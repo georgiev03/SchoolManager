@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SchoolManager.Core.Constants;
 using SchoolManager.Infrastructure.Data;
+using SchoolManager.Infrastructure.Data.Identity;
 using SchoolManager.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +13,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+        options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddRoles<IdentityRole>();
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {

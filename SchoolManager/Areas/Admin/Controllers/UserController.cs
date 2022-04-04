@@ -5,7 +5,7 @@ using SchoolManager.Core.Constants;
 using SchoolManager.Core.Contracts;
 using SchoolManager.Infrastructure.Data.Identity;
 
-namespace SchoolManager.Controllers
+namespace SchoolManager.Areas.Admin.Controllers
 {
     public class UserController : BaseController
     {
@@ -30,6 +30,22 @@ namespace SchoolManager.Controllers
             return View();
         }
 
-       
+        [Authorize(Roles = UserConstants.Roles.Administrator)]
+        public async Task<IActionResult> ManageUsers()
+        {
+            var users = await service.GetUsers();
+
+            return Ok(users);
+        }
+
+        public async Task<IActionResult> CreateRole()
+        {
+            //await roleManager.CreateAsync(new IdentityRole()
+            //{
+            //    Name = UserConstants.Roles.Administrator
+            //});
+
+            return Ok();
+        }
     }
 }

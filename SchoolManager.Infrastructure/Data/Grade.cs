@@ -18,7 +18,7 @@ namespace SchoolManager.Infrastructure.Data
 
         [Required]
         [ForeignKey(nameof(Student))]
-        public Guid StudentId { get; set; }
+        public string StudentId { get; set; }
         public Student Student { get; set; }
     }
 }

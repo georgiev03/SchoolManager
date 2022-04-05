@@ -5,7 +5,7 @@ namespace SchoolManager.Infrastructure.Data
     public class School
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [StringLength(50)]

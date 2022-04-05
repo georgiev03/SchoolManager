@@ -5,11 +5,11 @@ namespace SchoolManager.Infrastructure.Data
     public class TeacherClass
     {
         [ForeignKey(nameof(Teacher))]
-        public Guid TeacherId { get; set; }
+        public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
         [ForeignKey(nameof(Class))]
-        public Guid ClassId { get; set; }
+        public string ClassId { get; set; }
         public Class Class { get; set; }
     }
 }

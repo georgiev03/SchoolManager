@@ -9,8 +9,8 @@ namespace SchoolManager.Infrastructure.Data
 {
     public class Class
     {
-        [Key]
-        public Guid Id { get; set; }
+        [Key] 
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         public int Grade { get; set; }

@@ -179,7 +179,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasIndex("SchoolId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Grade", b =>
@@ -205,7 +205,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Grades", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Identity.ApplicationUser", b =>
@@ -303,7 +303,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Schools");
+                    b.ToTable("Schools", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Student", b =>
@@ -337,7 +337,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Teacher", b =>
@@ -372,7 +372,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.TeacherClass", b =>
@@ -387,7 +387,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("TeacherClasses");
+                    b.ToTable("TeacherClasses", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

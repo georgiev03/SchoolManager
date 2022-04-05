@@ -23,6 +23,8 @@ namespace SchoolManager.Controllers
             roleManager = _roleManager;
             userManager = _userManager;
             service = _service;
+
+            
         }
 
         public IActionResult Index()

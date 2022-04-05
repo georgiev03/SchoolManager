@@ -11,7 +11,7 @@ namespace SchoolManager.Infrastructure.Data
     public class Student
     {
         [Key]
-        public Guid StudentId { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [StringLength(15)]
@@ -31,7 +31,7 @@ namespace SchoolManager.Infrastructure.Data
         public ICollection<Grade> Grades { get; set; } = new HashSet<Grade>();
 
         [ForeignKey(nameof(Class))]
-        public Guid ClassId { get; set; }
+        public string ClassId { get; set; }
         public Class Class { get; set; }
 
     }

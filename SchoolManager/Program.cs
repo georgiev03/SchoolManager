@@ -8,17 +8,17 @@ using SchoolManager.ModelBinders;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(connectionString));
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddApplicationDbContexts(builder.Configuration);
 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     {
-        options.SignIn.RequireConfirmedAccount = true;
+        options.SignIn.RequireConfirmedAccount = false;
         options.Password.RequireNonAlphanumeric = false;
     })
     .AddRoles<IdentityRole>()
@@ -58,10 +58,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapAreaControllerRoute(
+app.MapControllerRoute(
     name: "adminArea",
-    areaName: "Admin",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

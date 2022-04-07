@@ -38,12 +38,17 @@ namespace SchoolManager.Areas.Admin.Controllers
             return Ok(users);
         }
 
+        //public Task<IActionResult> PromoteToTeacher()
+        //{
+        //    return View(new PeopleViewModel())
+        //}
+
         public async Task<IActionResult> CreateRole()
         {
-            //await roleManager.CreateAsync(new IdentityRole()
-            //{
-            //    Name = UserConstants.Roles.Administrator
-            //});
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = UserConstants.Roles.Administrator
+            });
 
             return Ok();
         }

@@ -32,6 +32,6 @@ namespace SchoolManager.Controllers
             return View();
         }
 
-       
+
     }
 }

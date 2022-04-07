@@ -12,8 +12,8 @@ using SchoolManager.Infrastructure.Data;
 namespace SchoolManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220324204126_UserAdded")]
-    partial class UserAdded
+    [Migration("20220407115057_PrincipalAdded")]
+    partial class PrincipalAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,9 +163,8 @@ namespace SchoolManager.Infrastructure.Migrations
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Class", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Grade")
                         .HasColumnType("int");
@@ -174,8 +173,8 @@ namespace SchoolManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<Guid?>("SchoolId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("SchoolId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -195,8 +194,9 @@ namespace SchoolManager.Infrastructure.Migrations
                     b.Property<double>("Mark")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Subject")
                         .IsRequired()
@@ -218,6 +218,16 @@ namespace SchoolManager.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("Birthdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ClassId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -230,12 +240,12 @@ namespace SchoolManager.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -272,6 +282,8 @@ namespace SchoolManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClassId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -283,11 +295,36 @@ namespace SchoolManager.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Principal", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("SchoolId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("Principals");
+                });
+
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.School", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Information")
                         .IsRequired()
@@ -303,50 +340,21 @@ namespace SchoolManager.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("PrincipalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PrincipalId");
 
                     b.ToTable("Schools");
                 });
 
-            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Student", b =>
-                {
-                    b.Property<Guid>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ClassId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasKey("StudentId");
-
-                    b.HasIndex("ClassId");
-
-                    b.ToTable("Students");
-                });
-
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Teacher", b =>
                 {
-                    b.Property<Guid>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -372,18 +380,18 @@ namespace SchoolManager.Infrastructure.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.HasKey("StudentId");
+                    b.HasKey("Id");
 
                     b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.TeacherClass", b =>
                 {
-                    b.Property<Guid>("ClassId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ClassId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ClassId", "TeacherId");
 
@@ -452,7 +460,7 @@ namespace SchoolManager.Infrastructure.Migrations
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Grade", b =>
                 {
-                    b.HasOne("SchoolManager.Infrastructure.Data.Student", "Student")
+                    b.HasOne("SchoolManager.Infrastructure.Data.Identity.ApplicationUser", "Student")
                         .WithMany("Grades")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -461,15 +469,35 @@ namespace SchoolManager.Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Student", b =>
+            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Identity.ApplicationUser", b =>
                 {
                     b.HasOne("SchoolManager.Infrastructure.Data.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId")
+                        .HasForeignKey("ClassId");
+
+                    b.Navigation("Class");
+                });
+
+            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Principal", b =>
+                {
+                    b.HasOne("SchoolManager.Infrastructure.Data.School", "School")
+                        .WithMany()
+                        .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Class");
+                    b.Navigation("School");
+                });
+
+            modelBuilder.Entity("SchoolManager.Infrastructure.Data.School", b =>
+                {
+                    b.HasOne("SchoolManager.Infrastructure.Data.Principal", "Principal")
+                        .WithMany()
+                        .HasForeignKey("PrincipalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Principal");
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.TeacherClass", b =>
@@ -498,14 +526,14 @@ namespace SchoolManager.Infrastructure.Migrations
                     b.Navigation("TeacherClasses");
                 });
 
+            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Grades");
+                });
+
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.School", b =>
                 {
                     b.Navigation("Classes");
-                });
-
-            modelBuilder.Entity("SchoolManager.Infrastructure.Data.Student", b =>
-                {
-                    b.Navigation("Grades");
                 });
 
             modelBuilder.Entity("SchoolManager.Infrastructure.Data.Teacher", b =>

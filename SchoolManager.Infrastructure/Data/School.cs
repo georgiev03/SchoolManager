@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
 
 namespace SchoolManager.Infrastructure.Data
 {
@@ -18,5 +20,9 @@ namespace SchoolManager.Infrastructure.Data
         public string Information { get; set; }
 
         public ICollection<Class> Classes { get; set; } = new HashSet<Class>();
+
+        [ForeignKey(nameof(Principal))]
+        public string PrincipalId { get; set; }
+        public Principal Principal { get; set; }
     }
 }

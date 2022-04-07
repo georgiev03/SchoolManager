@@ -12,6 +12,7 @@ namespace SchoolManager.Infrastructure.Data
         public DbSet<ApplicationUser> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherClass> TeacherClasses { get; set; }
+        public DbSet<Principal> Principals { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

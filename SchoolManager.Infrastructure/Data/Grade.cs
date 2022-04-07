@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Infrastructure.Data
 {
@@ -19,6 +20,6 @@ namespace SchoolManager.Infrastructure.Data
         [Required]
         [ForeignKey(nameof(Student))]
         public string StudentId { get; set; }
-        public Student Student { get; set; }
+        public ApplicationUser Student { get; set; }
     }
 }

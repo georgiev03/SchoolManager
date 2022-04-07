@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Infrastructure.Data
 {
@@ -18,7 +19,7 @@ namespace SchoolManager.Infrastructure.Data
         [Required]
         public char Letter { get; set; }
 
-        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
+        public ICollection<ApplicationUser> Students { get; set; } = new HashSet<ApplicationUser>();
 
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new HashSet<TeacherClass>();
     }

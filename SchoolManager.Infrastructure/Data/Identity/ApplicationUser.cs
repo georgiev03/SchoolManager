@@ -11,25 +11,21 @@ namespace SchoolManager.Infrastructure.Data.Identity
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required]
         [StringLength(15)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        [Required]
         [StringLength(15)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        [Required]
         [StringLength(50)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
-        [Required]
-        public DateTime Birthdate { get; set; }
+        public DateTime? Birthdate { get; set; }
 
         public ICollection<Grade> Grades { get; set; } = new HashSet<Grade>();
 
         [ForeignKey(nameof(Class))]
-        public string ClassId { get; set; }
-        public Class Class { get; set; }
+        public string? ClassId { get; set; }
+        public Class? Class { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManager.Infrastructure.Data
 {
-    public class Student
+    public class Principal
     {
         [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -21,18 +21,8 @@ namespace SchoolManager.Infrastructure.Data
         [StringLength(15)]
         public string LastName { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Address { get; set; }
-
-        [Required]
-        public DateTime Birthdate { get; set; }
-
-        public ICollection<Grade> Grades { get; set; } = new HashSet<Grade>();
-
-        [ForeignKey(nameof(Class))]
-        public string ClassId { get; set; }
-        public Class Class { get; set; }
-
+        [ForeignKey(nameof(School))]
+        public string SchoolId { get; set; }
+        public School School { get; set; }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model ClassListViewModel
+
+@{
+	ViewData["Title"] = "Join Class";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-bordered table-hover">
+	<thead>
+	<tr>
+		<th>
+			Grade
+		</th>
+		<th>
+			Letter
+		</th>
+		<th>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var _class in Model.Classes)
+	{
+		<tr>
+			<th>
+				@_class.Grade
+			</th>
+			<th>
+				@_class.Letter
+			</th>
+			<th>
+				<form asp-action="JoinClass" method="post">
+					<div class="row">
+						<div class="col-md-9">
+							<input type="hidden" name="ClassId" value="@_class.Id" />
+						</div>
+						<div class="col-md-3">
+							<input class="btn btn-sm btn-primary" type="submit" value="Join class" />
+						</div>
+					</div>
+				</form>
+                    
+			</th>
+		</tr>
+	}
+	</tbody>
+</table>

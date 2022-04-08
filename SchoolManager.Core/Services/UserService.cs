@@ -20,7 +20,7 @@ namespace SchoolManager.Core.Services
             repo = _repo;
         }
 
-        public async Task<IEnumerable<UserListViewModel>> GetUsers()
+        public async Task<IEnumerable<UserListViewModel>> GetUsersAsync()
         {
             return await repo.All<ApplicationUser>()
                .Select(u => new UserListViewModel()

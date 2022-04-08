@@ -62,11 +62,10 @@ namespace SchoolManager.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToRole(AddUserToRoleFormModel model)
         {
-
             var roleExists = await this.roleManager.RoleExistsAsync(model.Role);
             var user = await this.userManager.FindByIdAsync(model.UserId);
             var userExists = user != null;
-
+            
             if (!roleExists || !userExists)
             {
                 ModelState.AddModelError(string.Empty, "Invalid identity details.");
@@ -75,6 +74,11 @@ namespace SchoolManager.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 return RedirectToAction(nameof(Index));
+            }
+
+            if (model.Role == UserConstants.Roles.Teacher)
+            {
+                await service.MakeUserTeacher(user);
             }
 
             await this.userManager.AddToRoleAsync(user, model.Role);

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SchoolManager.Core.Constants
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -55,7 +56,11 @@
                 <!-- Sidebar Menu -->
                 <partial name="_MainMenu" />
                 <!-- /.sidebar-menu -->
-                
+                @if (User.IsInRole(UserConstants.Roles.Administrator))
+                {
+	                <partial name="_PromotePartial"/>
+
+                }
                 <partial name="_Grades"/>
             </div>
             <!-- /.sidebar -->

@@ -1,5 +1,4 @@
-﻿
-@*@model UserListingsViewModel*@
+﻿@model UserListingsViewModel
 
 @{
 	ViewData["Title"] = "User Administration";
@@ -11,9 +10,6 @@
 	<thead>
 	<tr>
 		<th>
-			Username
-		</th>
-		<th>
 			E-mail
 		</th>
 		<th>
@@ -24,9 +20,6 @@
 	@foreach (var user in Model.Users)
 	{
 		<tr>
-			<th>
-				@user.Username
-			</th>
 			<th>
 				@user.Email
 			</th>

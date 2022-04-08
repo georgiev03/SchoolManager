@@ -12,6 +12,6 @@ namespace SchoolManager.Core.Contracts
     {
         Task GenerateClasses();
 
-        Task<ICollection<ClassListViewModel>> GetAllClasses();
+        Task<ICollection<ClassViewModel>> GetAllClassesAsync();
     }
 }

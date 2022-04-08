@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManager.Core.Models
 {
-    public class ClassListViewModel
+    public class ClassViewModel
     {
         public string Id { get; set; }
 

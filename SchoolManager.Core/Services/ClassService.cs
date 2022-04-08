@@ -42,14 +42,16 @@ namespace SchoolManager.Core.Services
              repo.SaveChanges();
         }
 
-        public async Task<ICollection<ClassListViewModel>> GetAllClasses()
+        public async Task<ICollection<ClassViewModel>> GetAllClassesAsync()
             => await repo.All<Class>()
-                .Select(c => new ClassListViewModel()
+                .Select(c => new ClassViewModel()
                 {
                     Grade = c.Grade,
                     Letter = c.Letter,
                     Id = c.Id
                 })
+                .OrderBy(c => c.Grade)
+                .ThenBy(c => c.Letter)
                 .ToListAsync();
     }
 }

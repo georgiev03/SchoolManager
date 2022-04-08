@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManager.Core.Constants;
 using SchoolManager.Core.Contracts;
+using SchoolManager.Core.Models;
 using SchoolManager.Infrastructure.Data.Identity;
+using SchoolManager.Models;
 
 namespace SchoolManager.Controllers
 {
@@ -32,6 +34,24 @@ namespace SchoolManager.Controllers
             return View();
         }
 
+        public IActionResult Information()
+        {
+            return View(new PersonInformationFormModel());
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Information(PersonInformationFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await userManager.GetUserAsync(User);
+
+            await service.UpdateUserInformation(model, user);
+
+            return Redirect("/");
+        }
     }
 }

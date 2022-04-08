@@ -20,8 +20,6 @@ namespace SchoolManager.Infrastructure.Data.Identity
         [StringLength(50)]
         public string? Address { get; set; }
 
-        public DateTime? Birthdate { get; set; }
-
         public ICollection<Grade> Grades { get; set; } = new HashSet<Grade>();
 
         [ForeignKey(nameof(Class))]

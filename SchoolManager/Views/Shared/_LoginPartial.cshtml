@@ -5,13 +5,19 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+	var user = await UserManager.GetUserAsync(User);
+	string names = $"{user.FirstName} {user.LastName}";
+	if (user.FirstName == null)
+	{
+		names = user.Email;
+	}
 	<!-- Sidebar user panel (optional) -->
 	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 		<div class="image">
 			<img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
 		</div>
 		<div class="info">
-			<a href="user/information" class="d-block">@User.Identity?.Name</a>
+			<a href="user/information" class="d-block">@names</a>
 		</div>
 	</div>
 }

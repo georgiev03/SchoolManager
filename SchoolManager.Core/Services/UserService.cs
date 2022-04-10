@@ -42,7 +42,6 @@ namespace SchoolManager.Core.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Address = user.Address,
-                PhoneNumber = user.PhoneNumber
             };
 
             await repo.AddAsync(teacher);

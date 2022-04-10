@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using SchoolManager.Core.Models;
+using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Core.Contracts
 {
@@ -13,5 +14,6 @@ namespace SchoolManager.Core.Contracts
         Task GenerateClasses();
 
         Task<ICollection<ClassViewModel>> GetAllClassesAsync();
+        Task<(string, bool)> JoinClass(string classId, ApplicationUser user);
     }
 }

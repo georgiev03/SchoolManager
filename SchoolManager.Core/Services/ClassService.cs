@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManager.Core.Contracts;
 using SchoolManager.Core.Models;
 using SchoolManager.Infrastructure.Data;
+using SchoolManager.Infrastructure.Data.Identity;
 using SchoolManager.Infrastructure.Data.Repositories;
 
 namespace SchoolManager.Core.Services
@@ -53,5 +54,38 @@ namespace SchoolManager.Core.Services
                 .OrderBy(c => c.Grade)
                 .ThenBy(c => c.Letter)
                 .ToListAsync();
+
+        public async Task<(string, bool)> JoinClass(string classId, ApplicationUser user)
+        {
+            var _class = await repo.GetByIdAsync<Class>(classId);
+            var teacher = await repo.GetByIdAsync<Teacher>(user.Id);
+
+            bool success = true;
+            string message = $"You successfully joined {_class.Grade} {_class.Letter} class";
+
+            if (teacher.TeacherClasses.Any(tc => tc.Class == _class))
+            {
+                message = $"You are already teaching {_class.Grade} {_class.Letter} class";
+                success = false;
+            }
+            else if (teacher.TeacherClasses.Count == 8)
+            {
+                message = "You can only teach up to 8 classes";
+                success = false;
+            }
+            else
+            {
+                teacher.TeacherClasses.Add(new TeacherClass()
+                {
+                    Teacher = teacher,
+                    Class = _class
+                });
+            }
+
+            repo.Update(teacher);
+            await repo.SaveChangesAsync();
+
+            return (message, success);
+        }
     }
 }

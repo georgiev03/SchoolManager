@@ -22,10 +22,6 @@ namespace SchoolManager.Infrastructure.Data
         [Required]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(15)]
-        public string PhoneNumber { get; set; }
-
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new HashSet<TeacherClass>();
     }
 }

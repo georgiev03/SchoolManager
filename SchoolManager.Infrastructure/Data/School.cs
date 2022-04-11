@@ -10,11 +10,11 @@ namespace SchoolManager.Infrastructure.Data
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string Location { get; set; }
 
         public string Information { get; set; }

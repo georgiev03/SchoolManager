@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SchoolManager.Infrastructure.Data.Enums;
 using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Infrastructure.Data
@@ -10,12 +11,10 @@ namespace SchoolManager.Infrastructure.Data
         public int Id { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public string Subject { get; set; }
+        public Subject Subject { get; set; }
 
         [Required]
         public double Mark { get; set; }
-
 
         [Required]
         [ForeignKey(nameof(Student))]

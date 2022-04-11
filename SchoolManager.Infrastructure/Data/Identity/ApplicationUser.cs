@@ -11,10 +11,10 @@ namespace SchoolManager.Infrastructure.Data.Identity
 {
     public class ApplicationUser : IdentityUser
     {
-        [StringLength(15)]
+        [StringLength(25)]
         public string? FirstName { get; set; }
 
-        [StringLength(15)]
+        [StringLength(25)]
         public string? LastName { get; set; }
 
         [StringLength(50)]

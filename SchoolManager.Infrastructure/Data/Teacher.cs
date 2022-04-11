@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SchoolManager.Infrastructure.Data.Enums;
 
 namespace SchoolManager.Infrastructure.Data
 {
@@ -21,6 +22,9 @@ namespace SchoolManager.Infrastructure.Data
 
         [Required]
         public string Email { get; set; }
+
+        [Required]
+        public Subject Subject { get; set; }
 
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new HashSet<TeacherClass>();
     }

@@ -14,12 +14,13 @@ namespace SchoolManager.Infrastructure.Data
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
-        [StringLength(15)]
+        [StringLength(25)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(15)]
+        [StringLength(25)]
         public string LastName { get; set; }
+
 
         [ForeignKey(nameof(School))]
         public string SchoolId { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManager.Models;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace SchoolManager.Controllers
 {

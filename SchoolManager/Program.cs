@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SchoolManager.Core.Constants;
+using SchoolManager.Extensions;
 using SchoolManager.Infrastructure.Data;
 using SchoolManager.Infrastructure.Data.Identity;
 using SchoolManager.ModelBinders;

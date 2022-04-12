@@ -1,14 +1,20 @@
-﻿<nav class="mt-2">
+﻿@using SchoolManager.Core.Constants
+<nav class="mt-2">
 	<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 		<!-- Add icons to the links using the .nav-icon class
 		with font-awesome or any other icon font library -->
 		<li class="nav-item">
-			<a href="/Grades" class="nav-link">
-				<i class="fas fa-pen-alt"></i>		
-				<p>
-					Grades
-				</p>
-			</a>
+			@{
+				string path = User.IsInRole(UserConstants.Roles.Teacher) ? "/Teacher/Grades" : "/Grades";
+
+				<a href="@path" class="nav-link">
+					<i class="fas fa-pen-alt"></i>
+					<p>
+						Grades
+					</p>
+				</a>
+
+			}
 		</li>
 	</ul>
 </nav>

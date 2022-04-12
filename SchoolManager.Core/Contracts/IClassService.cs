@@ -14,6 +14,11 @@ namespace SchoolManager.Core.Contracts
         Task GenerateClasses();
 
         Task<ICollection<ClassViewModel>> GetAllClassesAsync();
+
         Task<(string, bool)> JoinClass(string classId, ApplicationUser user);
+
+        Task<ICollection<ClassViewModel>> GetAllClassesForATeacherAsync(ApplicationUser user);
+
+        Task<IEnumerable<StudentViewModel>> GetAllStudentsFromClassAsync(string classId, ApplicationUser user);
     }
 }

@@ -1,0 +1,38 @@
+﻿@model ClassListViewModel
+
+@{
+	ViewData["Title"] = "Choose a class";
+	int counter = 0;
+}
+
+<section class="content">
+	<div class="row" style="width: 100%">
+		@foreach (var _class in Model.Classes)
+		{
+
+			<div class="col-md-2 col-sm-6 col-12">
+				@*<div class="info-box">*@
+				<form asp-action="ClassInfo" method="post">
+					<span class="input-group-sm">
+						@*<div class="row">*@
+						<div class="col-md-9">
+							<input type="hidden" name="ClassId" value="@_class.Id" />
+						</div>
+						<div class="col-md-2">
+							<input class="btn btn-sm btn-primary" style="width:100px" type="submit" value="@_class.Grade @_class.Letter" />
+						</div>
+						@*</div>*@
+					</span>
+				</form>
+				@*<div class="info-box-content">
+					<span class="info-box-text">number letter</span>
+					</div>*@
+				@*</div>*@
+
+			</div>
+
+		}
+	</div>
+
+
+</section>

@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SchoolManager.Core.Contracts;
 using SchoolManager.Core.Services;
 using SchoolManager.Infrastructure.Data;
 using SchoolManager.Infrastructure.Data.Repositories;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace SchoolManager.Extensions
 {
     public static class ServiceCollectionExtension
     {

@@ -40,7 +40,7 @@ namespace SchoolManager.Core.Services
 
             await repo.AddRangeAsync(classes);
 
-             repo.SaveChanges();
+            repo.SaveChanges();
         }
 
         public async Task<ICollection<ClassViewModel>> GetAllClassesAsync()
@@ -58,7 +58,11 @@ namespace SchoolManager.Core.Services
         public async Task<(string, bool)> JoinClass(string classId, ApplicationUser user)
         {
             var _class = await repo.GetByIdAsync<Class>(classId);
-            var teacher = await repo.GetByIdAsync<Teacher>(user.Id);
+            //var teacher = await repo.GetByIdAsync<Teacher>(user.Id);
+            var teacher = repo.All<Teacher>()
+                .Where(t => t.Id == user.Id)
+                .Include(t => t.TeacherClasses)
+                .FirstOrDefault();
 
             bool success = true;
             string message = $"You successfully joined {_class.Grade} {_class.Letter} class";
@@ -86,6 +90,44 @@ namespace SchoolManager.Core.Services
             await repo.SaveChangesAsync();
 
             return (message, success);
+        }
+
+        public async Task<ICollection<ClassViewModel>> GetAllClassesForATeacherAsync(ApplicationUser user)
+        {
+            var teacher = await repo.GetByIdAsync<Teacher>(user.Id);
+
+            return await repo.All<Class>()
+                .Where(c => c.TeacherClasses.Any(tc => tc.Teacher == teacher))
+                .Select(c => new ClassViewModel()
+                {
+                    Grade = c.Grade,
+                    Letter = c.Letter,
+                    Id = c.Id
+                })
+                .OrderBy(c => c.Grade)
+                .ThenBy(c => c.Letter)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<StudentViewModel>> GetAllStudentsFromClassAsync(string classId, ApplicationUser user)
+        {
+            var teacher = await repo.GetByIdAsync<Teacher>(user.Id);
+
+
+            return await repo.All<ApplicationUser>()
+                .Where(s => s.ClassId == classId)
+                .Include(s => s.Grades)
+                .Select(s => new StudentViewModel()
+                {
+                    FullName = s.FirstName + " " + s.LastName,
+                    Marks = s
+                        .Grades
+                        .Where(g => g.Subject == teacher.Subject)
+                        .Select( g=> g.Mark)
+                        .ToList(),
+                    Id = s.Id
+                })
+                .ToListAsync();
         }
     }
 }

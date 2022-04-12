@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolManager.Core.Constants;
 
-namespace SchoolManager.Areas.Teacher.Controllers
+namespace SchoolManager.Areas.Admin.Controllers
 {
-    [Authorize(Roles = UserConstants.Roles.Teacher)]
-    [Area("Teacher")]
-
+    [Authorize(Roles = UserConstants.Roles.Administrator)]
+    [Area("Admin")]
     public class BaseController : Controller
     {
         

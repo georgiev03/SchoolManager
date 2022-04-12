@@ -23,7 +23,8 @@ namespace SchoolManager.Infrastructure.Data
 
 
         [ForeignKey(nameof(School))]
-        public string SchoolId { get; set; }
-        public School School { get; set; }
+        public string? SchoolId { get; set; }
+
+        public School? School { get; set; }
     }
 }

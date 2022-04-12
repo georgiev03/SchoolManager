@@ -1,21 +1,19 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using SchoolManager.Areas.Teacher.Models;
-using SchoolManager.Core.Constants;
 using SchoolManager.Core.Contracts;
-using SchoolManager.Core.Models;
+using SchoolManager.Core.Services;
 using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Areas.Teacher.Controllers
 {
-    public class ClassController : BaseController
+    public class GradesController : BaseController
     {
         private readonly IClassService service;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ClassController(
+        public GradesController(
             IClassService _service,
             UserManager<ApplicationUser> _userManager)
         {
@@ -25,7 +23,8 @@ namespace SchoolManager.Areas.Teacher.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var classes = await service.GetAllClassesAsync();
+            var user = await userManager.GetUserAsync(User);
+            var classes = await service.GetAllClassesForATeacherAsync(user);
 
             return View(new ClassListViewModel
             {
@@ -33,23 +32,17 @@ namespace SchoolManager.Areas.Teacher.Controllers
             });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> JoinClass(string classId)
+		//TODO: Create class-student list
+		public async Task<IActionResult> ClassInfo(string classId)
         {
             var user = await userManager.GetUserAsync(User);
-            (string msg, bool success) = await service.JoinClass(classId, user);
+            var students = await service.GetAllStudentsFromClassAsync(classId, user);
 
-            if (success)
+            return View("ChildrenForm", new StudentListViewModel
             {
-                ViewData[MessageConstant.SuccessMessage] = msg;
-            }
-            else
-            {
-                ViewData[MessageConstant.ErrorMessage] = msg;
-            }
-
-            return Redirect("/");
+                Students = students
+            });
         }
 
-    }
+	}
 }

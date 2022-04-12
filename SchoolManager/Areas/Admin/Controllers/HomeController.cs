@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolManager.Areas.Admin.Models;
 
 namespace SchoolManager.Areas.Admin.Controllers
 {
@@ -8,5 +9,10 @@ namespace SchoolManager.Areas.Admin.Controllers
         {
             return View();
         }
+
+        //public Task<IActionResult> UpdateSchoolInfo()
+        //{
+        //    return View(new SchoolInfoViewModel());
+        //}
     }
 }

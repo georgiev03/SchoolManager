@@ -22,7 +22,7 @@ namespace SchoolManager.Infrastructure.Data
         public ICollection<Class> Classes { get; set; } = new HashSet<Class>();
 
         [ForeignKey(nameof(Principal))]
-        public string PrincipalId { get; set; }
-        public Principal Principal { get; set; }
+        public string? PrincipalId { get; set; }
+        public Principal? Principal { get; set; }
     }
 }

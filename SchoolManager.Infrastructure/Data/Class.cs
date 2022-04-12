@@ -10,7 +10,7 @@ namespace SchoolManager.Infrastructure.Data
 {
     public class Class
     {
-        [Key] 
+        [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]

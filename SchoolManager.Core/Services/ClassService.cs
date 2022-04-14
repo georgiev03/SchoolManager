@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManager.Core.Contracts;
 using SchoolManager.Core.Models;
 using SchoolManager.Infrastructure.Data;
+using SchoolManager.Infrastructure.Data.Enums;
 using SchoolManager.Infrastructure.Data.Identity;
 using SchoolManager.Infrastructure.Data.Repositories;
 
@@ -63,6 +64,11 @@ namespace SchoolManager.Core.Services
                 .Where(t => t.Id == user.Id)
                 .Include(t => t.TeacherClasses)
                 .FirstOrDefault();
+
+            if (teacher == null || _class == null)
+            {
+                throw new ArgumentException("Invalid teacher or class");
+            }
 
             bool success = true;
             string message = $"You successfully joined {_class.Grade} {_class.Letter} class";
@@ -128,6 +134,37 @@ namespace SchoolManager.Core.Services
                     Id = s.Id
                 })
                 .ToListAsync();
+        }
+
+        public async Task<Teacher?> GetTeacherAsync(ApplicationUser user)
+            => await repo.All<Teacher>()
+                .FirstOrDefaultAsync(t => t.Id == user.Id);
+
+        public async Task AddMarkToStudentAsync(ApplicationUser? student, string markAsString, Subject subject)
+        {
+            if (student == null)
+            {
+                throw new ArgumentException("Invalid student");
+            }
+
+            double mark = double.Parse(markAsString);
+
+            if (mark > 6 || mark < 2)
+            {
+                throw new ArgumentException("Mark is not a valid one");
+            }
+
+            var grade = new Grade()
+            {
+                Mark = mark,
+                Student = student,
+                Subject = subject
+            };
+
+            student.Grades.Add(grade);
+            repo.Update(student);
+
+            await repo.SaveChangesAsync();
         }
     }
 }

@@ -35,20 +35,18 @@
 					</div>
 				</th>
 				<th>
-					<form asp-action="AddToRole" method="post">
-						<asp:DropDownList id="Mark"
-									  OnSelectedIndexChanged="Selection_Change"
-									  runat="server">
-
-							<asp:ListItem Selected="True" Value="6"> 6 </asp:ListItem>
-							<asp:ListItem Value="5"> 5 </asp:ListItem>
-							<asp:ListItem Value="4"> 4 </asp:ListItem>
-							<asp:ListItem Value="3"> 3 </asp:ListItem>
-							<asp:ListItem Value="2"> 2 </asp:ListItem>
-
-						</asp:DropDownList>
+					<form asp-action="AddMark" method="post">
+						<div class="row" style="width: 100%">
+							<input type="hidden" name="StudentId" value="@student.Id" />
+							<input type="hidden" name="Subject" value="@Model.Subject" />
+							<div class="col-md-5">
+								<select name="Mark" asp-items="Model.Marks" class="form-control"></select>
+							</div>
+							<div>
+								<input class="btn btn-sm btn-primary" type="submit" value="Save" />
+							</div>
+						</div>
 					</form>
-
 				</th>
 			</tr>
 		}

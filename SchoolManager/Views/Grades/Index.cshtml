@@ -1,0 +1,47 @@
+﻿@using SchoolManager.Infrastructure.Data.Identity
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+@{
+	var user = await UserManager.GetUserAsync(User);
+	string names = $"{user.FirstName} {user.LastName}";
+	ViewData["Title"] = $"{names}'s marks";
+}
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th>
+			Subject
+		</th>
+		<th>
+			Marks
+		</th>
+		<th>
+			Avg. Mark
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var student in Model.Students)
+	{
+		<tr>
+			<th>
+				@student.FullName
+			</th>
+			<th>
+				@{
+					string mark = string.Join(", ", student.Marks);
+				}
+				<div class="row">
+					@mark
+				</div>
+			</th>
+			<th>
+				
+			</th>
+		</tr>
+	}
+	</tbody>
+</table>

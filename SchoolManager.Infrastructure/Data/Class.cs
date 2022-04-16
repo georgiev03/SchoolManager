@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,5 +23,10 @@ namespace SchoolManager.Infrastructure.Data
         public ICollection<ApplicationUser> Students { get; set; } = new HashSet<ApplicationUser>();
 
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new HashSet<TeacherClass>();
+
+        [ForeignKey(nameof(School))]
+        public string? SchoolId { get; set; }
+
+        public School? School { get; set; }
     }
 }

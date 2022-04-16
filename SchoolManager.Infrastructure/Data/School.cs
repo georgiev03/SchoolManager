@@ -24,5 +24,7 @@ namespace SchoolManager.Infrastructure.Data
         [ForeignKey(nameof(Principal))]
         public string? PrincipalId { get; set; }
         public Principal? Principal { get; set; }
+
+        public string Image { get; set; }
     }
 }

@@ -13,6 +13,17 @@ html {
   min-height: 100%;
 }
 
-body {
-  /*margin-bottom: 60px;*/
+@media (min-width: 768px) {
+    .child {
+        float: left;
+        width: 50%;
+    }
+
+    .parent {
+         display: flex;
+    }
 }
+
+    body {
+        /*margin-bottom: 60px;*/
+    }

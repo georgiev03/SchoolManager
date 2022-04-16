@@ -16,6 +16,7 @@ namespace SchoolManager.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<ISchoolService, SchoolService>();
 
             return services;
         }

@@ -1,0 +1,47 @@
+﻿@model SchoolManager.Core.Models.SchoolInfoVewModel
+
+@{
+	ViewData["Title"] = "School Info";
+}
+
+
+<div>
+	<hr />
+	<section class="parent">
+
+			<section class="child">
+			<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Name)
+			</dt>
+			<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Name)
+			</dd>
+			<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.PrincipalNames)
+			</dt>
+			<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.PrincipalNames)
+			</dd>
+			<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Location)
+			</dt>
+			<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Location)
+			</dd>
+			<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Information)
+			</dt>
+			<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Information)
+			</dd>
+	</section>
+	<section class="child">
+
+		<dt class="col-sm-2">
+			<img src="@Model.ImageUrl" />
+		</dt>
+	</section>
+
+	</section>
+</div>
+

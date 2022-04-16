@@ -15,15 +15,16 @@ namespace SchoolManager.Extensions
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IGradeService, GradeService>();
 
             return services;
         }
 
         public static IServiceCollection AddApplicationDbContexts(this IServiceCollection services, IConfiguration config)
         {
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("Server=schoolmanagerdbserver.database.windows.net;Database=SchoolManager_db;User Id=slabaka109; Password=Jorkata03;");
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer("Server=schoolmanagerdbserver.database.windows.net;Database=SchoolManager_db;User Id=slabaka109; Password=Jorkata03"));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;

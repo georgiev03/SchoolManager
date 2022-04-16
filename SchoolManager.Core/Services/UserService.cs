@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManager.Core.Contracts;
 using SchoolManager.Core.Models;
 using SchoolManager.Infrastructure.Data;
+using SchoolManager.Infrastructure.Data.Enums;
 using SchoolManager.Infrastructure.Data.Identity;
 using SchoolManager.Infrastructure.Data.Repositories;
 
@@ -33,7 +34,7 @@ namespace SchoolManager.Core.Services
                .ToListAsync();
         }
 
-        public async Task MakeUserTeacher(ApplicationUser user)
+        public async Task MakeUserTeacher(ApplicationUser user, Subject subject)
         {
             var teacher = new Teacher()
             {
@@ -42,6 +43,7 @@ namespace SchoolManager.Core.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Address = user.Address,
+                Subject = subject
             };
 
             await repo.AddAsync(teacher);

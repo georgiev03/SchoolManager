@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 
-
+@model StudentMarksViewModel
 
 @{
 	var user = await UserManager.GetUserAsync(User);
@@ -24,22 +24,19 @@
 	</tr>
 	</thead>
 	<tbody>
-	@foreach (var student in Model.Students)
+	@foreach (var mark in Model.Marks)
 	{
 		<tr>
 			<th>
-				@student.FullName
+				@mark.Subject
 			</th>
 			<th>
-				@{
-					string mark = string.Join(", ", student.Marks);
-				}
 				<div class="row">
-					@mark
+					@string.Join(", ", mark.Marks)
 				</div>
 			</th>
 			<th>
-				
+				@(mark.AvgMark.ToString("f2"))
 			</th>
 		</tr>
 	}

@@ -7,5 +7,6 @@ namespace SchoolManager.Areas.Admin.Models
     {
         public IEnumerable<UserListViewModel> Users { get; set; }
         public IEnumerable<SelectListItem> Roles { get; set; }
+        public IEnumerable<SelectListItem> Subjects { get; set; }
     }
 }

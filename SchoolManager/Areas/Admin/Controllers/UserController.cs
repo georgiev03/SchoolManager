@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManager.Areas.Admin.Models;
 using SchoolManager.Core.Constants;
 using SchoolManager.Core.Contracts;
+using SchoolManager.Infrastructure.Data.Enums;
 using SchoolManager.Infrastructure.Data.Identity;
 
 namespace SchoolManager.Areas.Admin.Controllers
@@ -41,11 +42,25 @@ namespace SchoolManager.Areas.Admin.Controllers
                     Value = r.Name
                 })
                 .ToListAsync();
+            var subjects = new string[]
+            {
+                Subject.English.ToString(),
+                Subject.PE.ToString(),
+                Subject.Maths.ToString(),
+                Subject.IT.ToString(),
+                Subject.Bulgarian.ToString(),
+            }
+                .Select(s => new SelectListItem
+                {
+                    Text = s,
+                    Value = s
+                });
 
             return View(new UserListingsViewModel
             {
                 Users = users,
-                Roles = roles
+                Roles = roles,
+                Subjects = subjects
             });
         }
 
@@ -67,8 +82,10 @@ namespace SchoolManager.Areas.Admin.Controllers
             var roleExists = await this.roleManager.RoleExistsAsync(model.Role);
             var user = await this.userManager.FindByIdAsync(model.UserId);
             var userExists = user != null;
-            
-            if (!roleExists || !userExists)
+
+            var subjectExists = Enum.TryParse(model.Subject, out Subject subject);
+
+            if (!roleExists || !userExists || !subjectExists)
             {
                 ModelState.AddModelError(string.Empty, "Invalid identity details.");
             }
@@ -80,7 +97,7 @@ namespace SchoolManager.Areas.Admin.Controllers
 
             if (model.Role == UserConstants.Roles.Teacher)
             {
-                await service.MakeUserTeacher(user);
+                await service.MakeUserTeacher(user, subject);
             }
 
             await this.userManager.AddToRoleAsync(user, model.Role);
